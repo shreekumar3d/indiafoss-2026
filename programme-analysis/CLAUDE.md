@@ -6,7 +6,9 @@ https://fossunited.org/c/indiafoss/2026/cfp/<ID>
 
 The first sheet in the schedule ods file is for the General Track, which are general
 talks around FOSS and Digital Commons. The other sheets (except Lunch) correspond to
-half day mini conferences for specific narrower topics.
+half day mini conferences - called "devrooms" for specific narrower topics. Each
+devroom is curated by an independent community/group. Only the general track - including
+BoFs and Workshops is curated by the conference's Programme Commitee.
 
 Each talk can be classified in many ways, as specified in categories.md. The workshops in
 cfp-all.csv file happen on the day before the conference, and must be considered as part of
