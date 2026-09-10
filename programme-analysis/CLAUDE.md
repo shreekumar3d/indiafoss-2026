@@ -23,4 +23,6 @@ Create a visualization to show how the conference sessions fare on key metrics.
 Finally, generate a PDF file summary (if2026-summary.pdf) offering the assessment.
 In it, include an overall summary and gap analysis upfront.  Then offer a 2-3 page
 detailed overview.  Finally, dump a table that shows the various metrics
-(per categories.md) for all sessions
+(per categories.md) for all sessions. In the first page, clearly label this as
+an AI generated report. In the last page, include a note on how sessions were categorized
+in various ways.
