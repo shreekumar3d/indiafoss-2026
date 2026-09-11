@@ -8,7 +8,14 @@ The first sheet in the schedule ods file is for the General Track, which are gen
 talks around FOSS and Digital Commons. The other sheets (except Lunch) correspond to
 half day mini conferences - called "devrooms" for specific narrower topics. Each
 devroom is curated by an independent community/group. Only the general track - including
-BoFs and Workshops is curated by the conference's Programme Commitee.
+BoFs and Workshops is curated by the conference's Programme Commitee(PC).
+
+Selections of the devrooms were also made by the PC; see this page for the proposals
+https://forum.fossunited.org/t/call-for-devrooms-for-indiafoss-2026/7587 and the selections.
+Similarly, BoF and panels were also selected by the PC, see
+https://forum.fossunited.org/t/propose-birds-of-a-feather-bof-session-indiafoss-2026/7797
+and
+https://forum.fossunited.org/t/call-for-panel-discussions-indiafoss-2026/7798
 
 Each talk can be classified in many ways, as specified in categories.md. The workshops in
 cfp-all.csv file happen on the day before the conference, and must be considered as part of
@@ -25,6 +32,12 @@ Create a visualization to show how the conference sessions fare on key metrics.
 Finally, generate a PDF file summary (if2026-summary.pdf) offering the assessment.
 In it, include an overall summary and gap analysis upfront.  Then offer a 2-3 page
 detailed overview.  Finally, dump a table that shows the various metrics
-(per categories.md) for all sessions. In the first page, clearly label this as
-an AI generated report. In the last page, include a note on how sessions were categorized
-in various ways.
+(per categories.md) for all sessions.
+
+In the first page, clearly label this as an AI generated report. Any disclaimers
+(e.g. that this is not an official FOSS United/IndiaFOSS publication) must be
+prominent and easily visible.
+
+Close to the end of the report, include a note on how sessions were categorized
+in various ways. As part of the methodology page, include categories.md
+(all the text), and show how various parts of it map to our assessment.

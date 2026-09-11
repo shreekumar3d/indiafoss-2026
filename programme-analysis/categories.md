@@ -6,4 +6,4 @@ Use the following categories for classification:
   * Overall category: Hardware, Software, Data, FOSS Philosphy/Principles
   * Depth of technical coverage at Level: rated on a scale of 1 to 10
   * Novelty compared to existing work: rated on a scale of 1 to 10
-  * Suitability for Audience: graduate/master level students, designers, hackers, professionals, researchers, software developers, educators/professors, social workers, government employees, venture capitalists, business people
+  * Suitability for Audience: graduate/master level students, designers, hackers, professionals, researchers, software developers, educators/professors, social workers, government employees, venture capitalists, business people, etc
