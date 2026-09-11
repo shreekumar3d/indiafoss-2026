@@ -21,6 +21,28 @@ Each talk can be classified in many ways, as specified in categories.md. The wor
 cfp-all.csv file happen on the day before the conference, and must be considered as part of
 the overall conference too. Each workshop is approximately 2 hours.
 
+IndiaFOSS has community booths as well. https://fossunited.org/indiafoss/2026/booths
+lists all the community booths.  Each booth gets a table with two representatives. Booths
+may run for one or both days.  Booths provide a two way street, providing opportunity
+for communities to interact with attendees, and for attendees to learn and know projects
+and initiatives. Project URLs are listed in the booth list.
+
+We do have a smaller number of sponsor booths as well. At IndiaFOSS, sponsors do not get
+a talk slot. Sponsors are listed with their logos and hyperlinks on the conference main
+page : https://fossunited.org/indiafoss/2026 . "Community partners" listed are communities
+that are helping run the conference in some way.  PointBlank helps with a good chunk of
+on-ground volunteering. PointBlank, LLVM Social and Absurd industries run one devroom
+each as well : Cloud & DevOps, Compilers, and Hardware. The other devrooms are being
+run by individuals in a way rather than organized communities. AOSP is a borderline
+exception, with a couple of members from the aosp-devs.org community taking the lead.
+More info about the devrooms, managers and communities can be found by visiting
+this page https://fossunited.org/indiafoss/2026/devrooms, which links to one page each
+for every devroom.
+
+Finally, various statistics about attendees is at https://fossunited.org/indiafoss/2026/stats,
+including tiers of ticket sold, region from where the attendees are travelling to the
+conference.
+
 Given all that, assess if IndiaFOSS 2026 offers a wholesome programme for its attendees.
 What is well represented in the conference? What are the strengths and weaknesses of the
 conference programme. And more importantly, which part of the FOSS and digital commons
