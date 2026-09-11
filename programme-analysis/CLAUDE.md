@@ -36,7 +36,8 @@ detailed overview.  Finally, dump a table that shows the various metrics
 
 In the first page, clearly label this as an AI generated report. Any disclaimers
 (e.g. that this is not an official FOSS United/IndiaFOSS publication) must be
-prominent and easily visible.
+prominent and easily visible. Also mention that only publicly available data was
+used for generating this summary.
 
 Close to the end of the report, include a note on how sessions were categorized
 in various ways. As part of the methodology page, include categories.md
