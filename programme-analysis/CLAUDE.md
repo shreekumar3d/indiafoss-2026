@@ -50,6 +50,12 @@ conference programme. And more importantly, which part of the FOSS and digital c
 is missing/ill represented in the programme. Consider the duration of the talks also to
 arrive at the overall categorization and analysis.
 
+Include a section which categorizes our speakers into various buckets as well - students,
+early career professionals, working at well-known/established/large companies, working
+at startups, small/big companies, indie developers/consultants, working at for-profit/non-profit,
+etc Basically this is to understand the overall demographic of our speaker community,
+and identify gaps.
+
 Create a visualization to show how the conference sessions fare on key metrics.
 
 Finally, generate a PDF file summary (if2026-summary.pdf) offering the assessment.
@@ -66,4 +72,43 @@ Close to the end of the report, include a note on how sessions were categorized
 in various ways. As part of the methodology page, include categories.md
 (all the text), and show how various parts of it map to our assessment.
 
+Next, prepare another report which talks about how we can improve the conference.
+Some ideas:
 
+Groups of "producers" - each devrooms and many booths - can contribute at-least one
+workshop each. From the current list, how many workshops could we expect ? List
+them.
+
+Secondly, should we extend the devrooms themselves? Compare the selections against
+the overall proposed sessions - look at the rejects and estimate which devrooms
+could do with a longer slot.  These can be accessed at
+rejected-proposals.csv
+
+We could also encourage projects to run BoFs for informal engagement, updates,
+etc. How many can we expect ? Some extra rooms may be required due to this.
+
+At IndiaFOSS 2026, we are limited by the venue. We are running the sessions in
+the following places:
+- Hall 1, 840 seats
+- Hall 2, 250 seats
+- Hall 3, 120 seats
+- Room 1, 120 seats
+- Room 2 and 3, 35 seats each
+
+Let's say for next year - IndiaFOSS 2027 - If we folded all the workshops
+(including the extra contributed by producers) into the conference Days (Saturday and Sunday),
+then how many rooms we would need, and of what capacity ?
+
+Assume that
+- the venue will change
+- general track will still get something similar to Halls 1 and 2
+- conference still runs on two days, with morning and post lunch session
+- devrooms may run in halls/rooms with roughly 120 or 250 seats
+- Workshops would be run in rooms of approximately 35-50 seats. Each
+  workshop will occupy a morning or a post-lunch session slot
+- BoFs in 35 seat rooms.
+
+Which other FOSS communities from India must we invite? Can some of them run
+devrooms as mini-conference versions of their yearly conferences? Identify other
+communities from the digital commons/wikimedia too that may have an overlap
+with our communities and suggest.
