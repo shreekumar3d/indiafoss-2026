@@ -41,7 +41,8 @@ for every devroom.
 
 Finally, various statistics about attendees is at https://fossunited.org/indiafoss/2026/stats,
 including tiers of ticket sold, region from where the attendees are travelling to the
-conference.
+conference. Speakers and community booths are the "producers" in the conference. How
+healthy is our producer to attendee ratio ?
 
 Given all that, assess if IndiaFOSS 2026 offers a wholesome programme for its attendees.
 What is well represented in the conference? What are the strengths and weaknesses of the
@@ -64,3 +65,5 @@ used for generating this summary.
 Close to the end of the report, include a note on how sessions were categorized
 in various ways. As part of the methodology page, include categories.md
 (all the text), and show how various parts of it map to our assessment.
+
+
