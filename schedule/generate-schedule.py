@@ -11,9 +11,12 @@ sheet are: day, hall, start_time, duration, Session Type, Session Title
 - start_time is only written when it isn't a straight continuation of the
   previous session; when blank, start_time = previous end_time.
 - end_time = start_time + duration (minutes).
+- Session Title may instead hold a CFP id from cfp-info.csv; if it matches
+  one exactly, it's resolved to that talk's title before anything else
+  (title-map lookup, display) uses it.
 - Session Type is usually blank for CFP talks (looked up from cfp-info.csv
-  by title) and explicitly set (e.g. "other") for non-CFP items like
-  "Welcome Note", which have no CFP id.
+  by title, or by id per above) and explicitly set (e.g. "other") for
+  non-CFP items like "Welcome Note", which have no CFP id.
 - exclude == "yes" (General Track only) drops the talk from the output but
   its duration still occupies its slot, so later continuation rows are
   unaffected.
@@ -65,16 +68,15 @@ def normalize_title(title):
 
 
 def load_cfp_info(path):
-    """Return {normalized_title: (id, session_type, title)}."""
+    """Return ({normalized_title: (id, session_type, title)}, {id: (session_type, title)})."""
     by_norm_title = {}
+    by_id = {}
     with open(path, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            by_norm_title[normalize_title(row["Session Title"])] = (
-                row["ID"],
-                row["Session Type"],
-                row["Session Title"],
-            )
-    return by_norm_title
+            entry = (row["ID"], row["Session Type"], row["Session Title"])
+            by_norm_title[normalize_title(row["Session Title"])] = entry
+            by_id[row["ID"]] = (row["Session Type"], row["Session Title"])
+    return by_norm_title, by_id
 
 
 def cell_text(cell):
@@ -110,12 +112,15 @@ def read_sheets(path):
         yield table.getAttribute("name"), rows
 
 
-def load_title_map(path):
+def load_title_map(path, cfp_by_id):
     """Return {normalized_title: replacement} from title-map.ods.
 
     Used both to shorten over-long titles for display and as the title
     override fed into the cfp-info.csv lookup (replaces the old hardcoded
     TITLE_OVERRIDES dict).
+
+    Either column may instead hold a CFP id from cfp-info.csv, which is
+    resolved to that talk's title before use.
     """
     title_map = {}
     for sheet_name, rows in read_sheets(path):
@@ -125,11 +130,17 @@ def load_title_map(path):
             if not row or not row[0]:
                 continue
             title, replacement = (row + [""] * 2)[:2]
+            id_match = cfp_by_id.get(title)
+            if id_match:
+                title = id_match[1]
+            id_match = cfp_by_id.get(replacement)
+            if id_match:
+                replacement = id_match[1]
             title_map[normalize_title(title)] = replacement
     return title_map
 
 
-def build_sheet_schedule(sheet_name, header, data_rows, cfp_by_title, title_map, warnings):
+def build_sheet_schedule(sheet_name, header, data_rows, cfp_by_title, cfp_by_id, title_map, warnings):
     col = {name: i for i, name in enumerate(header)}
     has_exclude = "exclude" in col
 
@@ -181,12 +192,16 @@ def build_sheet_schedule(sheet_name, header, data_rows, cfp_by_title, title_map,
             prev_end = end_time
             continue
 
-        display_title = title_map.get(normalize_title(r_title), r_title)
+        id_match = cfp_by_id.get(r_title)
+        title = id_match[1] if id_match else r_title
+        display_title = title_map.get(normalize_title(title), title)
 
         if r_type:
             # explicitly typed, non-CFP item (Welcome Note, GB Elections, ...)
             talk_id = ""
             session_type = "Other" if r_type.lower() == "other" else r_type
+        elif id_match:
+            talk_id, session_type = r_title, id_match[0]
         else:
             match = cfp_by_title.get(normalize_title(display_title))
             if match is None:
@@ -213,8 +228,8 @@ def build_sheet_schedule(sheet_name, header, data_rows, cfp_by_title, title_map,
 
 def build_schedule(ods_path=ODS_PATH, cfp_csv_path=CFP_CSV_PATH, title_map_path=TITLE_MAP_ODS_PATH):
     """Return {sheet_name: [session, ...]} for every sheet in the ODS file."""
-    cfp_by_title = load_cfp_info(cfp_csv_path)
-    title_map = load_title_map(title_map_path)
+    cfp_by_title, cfp_by_id = load_cfp_info(cfp_csv_path)
+    title_map = load_title_map(title_map_path, cfp_by_id)
     warnings = []
 
     required_columns = {"day", "hall", "start_time", "duration", "Session Type", "Session Title"}
@@ -224,7 +239,7 @@ def build_schedule(ods_path=ODS_PATH, cfp_csv_path=CFP_CSV_PATH, title_map_path=
         header, data_rows = rows[0], rows[1:]
         assert required_columns.issubset(header), (sheet_name, header)
         schedule_by_sheet[sheet_name] = build_sheet_schedule(
-            sheet_name, header, data_rows, cfp_by_title, title_map, warnings
+            sheet_name, header, data_rows, cfp_by_title, cfp_by_id, title_map, warnings
         )
 
     return schedule_by_sheet, warnings
