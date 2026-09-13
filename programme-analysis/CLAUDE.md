@@ -21,6 +21,10 @@ Each talk can be classified in many ways, as specified in categories.md. The wor
 cfp-all.csv file happen on the day before the conference, and must be considered as part of
 the overall conference too. Each workshop is approximately 2 hours.
 
+Each session has a "reach" factor too - which is the number of seats in the hall/room
+allocated to it. The number of seats in each hall is mentioned later in the document.
+All workshops have a capacity of 35-40 seats.
+
 IndiaFOSS has community booths as well. https://fossunited.org/indiafoss/2026/booths
 lists all the community booths.  Each booth gets a table with two representatives. Booths
 may run for one or both days.  Booths provide a two way street, providing opportunity
@@ -29,20 +33,25 @@ and initiatives. Project URLs are listed in the booth list.
 
 We do have a smaller number of sponsor booths as well. At IndiaFOSS, sponsors do not get
 a talk slot. Sponsors are listed with their logos and hyperlinks on the conference main
-page : https://fossunited.org/indiafoss/2026 . "Community partners" listed are communities
-that are helping run the conference in some way.  PointBlank helps with a good chunk of
-on-ground volunteering. PointBlank, LLVM Social and Absurd industries run one devroom
-each as well : Cloud & DevOps, Compilers, and Hardware. The other devrooms are being
-run by individuals in a way rather than organized communities. AOSP is a borderline
-exception, with a couple of members from the aosp-devs.org community taking the lead.
-More info about the devrooms, managers and communities can be found by visiting
-this page https://fossunited.org/indiafoss/2026/devrooms, which links to one page each
+page : https://fossunited.org/indiafoss/2026 .
+
+"Community partners" listed are communities that are helping run the conference in some
+way.  They are not sponsors. PointBlank helps with a good chunk of on-ground volunteering.
+PointBlank, LLVM Social and Absurd industries run one devroom each as well : Cloud &
+DevOps, Compilers, and Hardware. The other devrooms are being run by individuals
+rather than organized communities. AOSP is a borderline exception, with a couple of
+members from the aosp-devs.org community taking the lead. More info about the devrooms,
+managers and communities can be found by visiting this page
+https://fossunited.org/indiafoss/2026/devrooms, which links to one page each
 for every devroom.
 
 Finally, various statistics about attendees is at https://fossunited.org/indiafoss/2026/stats,
 including tiers of ticket sold, region from where the attendees are travelling to the
 conference. Speakers and community booths are the "producers" in the conference. How
-healthy is our producer to attendee ratio ?
+healthy is our producer to attendee ratio ? Note that total registration count includes
+760 reserved free tickets for speakers, volunteers, sponsors, booths, plus diversity
+scholars(picked under a separate diversity scholarship). The statistics on the page
+are only for the purchased tickets, and do not cover these 760.
 
 Given all that, assess if IndiaFOSS 2026 offers a wholesome programme for its attendees.
 What is well represented in the conference? What are the strengths and weaknesses of the
@@ -101,14 +110,24 @@ then how many rooms we would need, and of what capacity ?
 
 Assume that
 - the venue will change
-- general track will still get something similar to Halls 1 and 2
 - conference still runs on two days, with morning and post lunch session
-- devrooms may run in halls/rooms with roughly 120 or 250 seats
-- Workshops would be run in rooms of approximately 35-50 seats. Each
+- general track will still run across two halls/rooms (suggest right size?)
+- devrooms may run in halls/rooms with anywhere between 50 to 250 seats.
+  We can have more rooms to run devrooms too. Devrooms could occupy half
+  day, or full day slot.
+- Workshops would be run in rooms of approximately 35-60 seats. Each
   workshop will occupy a morning or a post-lunch session slot
-- BoFs in 35 seat rooms.
+- BoFs in 35-60 seat rooms.
+- Number of community booths capped at 100
+- Sponsors capped at 15, each get 15 passes (like this year)
+
+Given all this, what will be the estimated number of attendees, all categories included,
+for IndiaFOSS 2027?
 
 Which other FOSS communities from India must we invite? Can some of them run
 devrooms as mini-conference versions of their yearly conferences? Identify other
 communities from the digital commons/wikimedia too that may have an overlap
 with our communities and suggest.
+
+Finally, prepare a document while assesses the wholesomeness of the general track
+only, including workshops.
