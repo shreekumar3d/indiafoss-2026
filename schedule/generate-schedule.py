@@ -28,6 +28,7 @@ import argparse
 import csv
 import re
 import sys
+from collections import Counter
 from datetime import datetime, timedelta
 
 from odf.opendocument import load
@@ -57,6 +58,21 @@ HALL_MAP = {
     "room_3": "Room 3",
 }
 
+# cfp-info.csv's "Response (Custom Answers)" field holds the track the
+# proposal was submitted under; map it to the matching if2026-schedule.ods
+# sheet name (case-insensitive on the CFP side).
+CFP_TRACK_TO_SHEET = {
+    "main track": "General Track",
+    "android open source project (aosp)": "AOSP",
+    "security": "Security",
+    "cloud & devops": "Cloud & DevOps",
+    "real time operating systems (rtos)": "RTOS",
+    "open hardware": "Hardware",
+    "documentation & technical writing": "Documentation & Technical Writing",
+    "open design": "Design",
+    "compilers, programming languages and systems": "Compilers",
+}
+
 
 def normalize_title(title):
     title = title.strip().lower()
@@ -68,14 +84,19 @@ def normalize_title(title):
 
 
 def load_cfp_info(path):
-    """Return ({normalized_title: (id, session_type, title)}, {id: (session_type, title)})."""
+    """Return ({normalized_title: (id, session_type, title)}, {id: (session_type, title, status, track)})."""
     by_norm_title = {}
     by_id = {}
     with open(path, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             entry = (row["ID"], row["Session Type"], row["Session Title"])
             by_norm_title[normalize_title(row["Session Title"])] = entry
-            by_id[row["ID"]] = (row["Session Type"], row["Session Title"])
+            by_id[row["ID"]] = (
+                row["Session Type"],
+                row["Session Title"],
+                row.get("Status", ""),
+                row.get("Response (Custom Answers)", ""),
+            )
     return by_norm_title, by_id
 
 
@@ -240,6 +261,58 @@ def build_schedule(ods_path=ODS_PATH, cfp_csv_path=CFP_CSV_PATH, title_map_path=
         assert required_columns.issubset(header), (sheet_name, header)
         schedule_by_sheet[sheet_name] = build_sheet_schedule(
             sheet_name, header, data_rows, cfp_by_title, cfp_by_id, title_map, warnings
+        )
+
+    scheduled_id_counts = Counter(
+        s["linked_cfp"]
+        for sessions in schedule_by_sheet.values()
+        for s in sessions
+        if s["linked_cfp"]
+    )
+    scheduled_ids = set(scheduled_id_counts)
+
+    for talk_id, count in scheduled_id_counts.items():
+        if count > 1:
+            _, title, status, _ = cfp_by_id[talk_id]
+            if status in ("Approved", "Screening"):
+                warnings.append(
+                    f"{status} session listed {count} times on schedule: {title!r} ({talk_id})"
+                )
+
+    for sheet_name, sessions in schedule_by_sheet.items():
+        for s in sessions:
+            if not s["linked_cfp"]:
+                continue
+            _, title, _, track = cfp_by_id[s["linked_cfp"]]
+            expected_sheet = CFP_TRACK_TO_SHEET.get(track.strip().lower())
+            if expected_sheet and expected_sheet != sheet_name:
+                warnings.append(
+                    f"[{sheet_name}] {title!r} ({s['linked_cfp']}) was submitted for track "
+                    f"{track!r} (expected on {expected_sheet!r})"
+                )
+
+    screening_by_track = Counter()
+    for talk_id, (_, _, status, track) in cfp_by_id.items():
+        if status == "Screening" and talk_id not in scheduled_ids:
+            screening_by_track[CFP_TRACK_TO_SHEET.get(track.strip().lower(), track or "(unknown)")] += 1
+
+    for track_name in sorted(screening_by_track):
+        warnings.append(f"[{track_name}] {screening_by_track[track_name]} session(s) in Screening status")
+
+    missing_by_type = Counter()
+    for talk_id, (session_type, title, status, track) in cfp_by_id.items():
+        if status == "Approved" and talk_id not in scheduled_ids:
+            expected_sheet = CFP_TRACK_TO_SHEET.get(track.strip().lower(), track)
+            warnings.append(
+                f"Approved session not on schedule: {title!r} ({talk_id}), track: {expected_sheet!r}"
+            )
+            missing_by_type[session_type] += 1
+
+    if missing_by_type:
+        warnings.append(
+            "Approved sessions not on schedule, by Session Type: "
+            + ", ".join(f"{t}: {n}" for t, n in sorted(missing_by_type.items()))
+            + f", total: {sum(missing_by_type.values())}"
         )
 
     return schedule_by_sheet, warnings
